@@ -51,7 +51,7 @@ public class UpdateGraduateForm extends javax.swing.JFrame {
         txtPhoneNumber = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtAddress = new javax.swing.JTextField();
-        bttnAccept = new javax.swing.JButton();
+        bttnUpdate = new javax.swing.JButton();
         bttnCancel = new javax.swing.JButton();
         rdBttnSexMale = new javax.swing.JRadioButton();
         rdBttnSexFemale = new javax.swing.JRadioButton();
@@ -96,7 +96,7 @@ public class UpdateGraduateForm extends javax.swing.JFrame {
         bttnGrpTypeWork.add(rdBttnWorkTypeGovernment);
         rdBttnWorkTypeGovernment.setText("Gobierno");
 
-        bttnAccept.setText("Aceptar");
+        bttnUpdate.setText("Actualizar");
 
         bttnCancel.setText("Cancelar");
 
@@ -116,7 +116,7 @@ public class UpdateGraduateForm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bttnCancel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bttnAccept))
+                        .addComponent(bttnUpdate))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lblControlNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -198,7 +198,7 @@ public class UpdateGraduateForm extends javax.swing.JFrame {
                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bttnAccept)
+                    .addComponent(bttnUpdate)
                     .addComponent(bttnCancel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -241,11 +241,11 @@ public class UpdateGraduateForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bttnAccept;
     private javax.swing.JButton bttnCancel;
     private javax.swing.ButtonGroup bttnGrpIsWorking;
     private javax.swing.ButtonGroup bttnGrpSex;
     private javax.swing.ButtonGroup bttnGrpTypeWork;
+    private javax.swing.JButton bttnUpdate;
     private javax.swing.JComboBox cmbBxCareer;
     private javax.swing.JComboBox cmbBxEgresedAt;
     private javax.swing.JLabel lblAddress;
