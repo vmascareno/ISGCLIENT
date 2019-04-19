@@ -57,7 +57,7 @@ public class DeleteGraduateForm extends javax.swing.JFrame {
         txtEgresedAt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Crear nuevo egresado");
+        setTitle("Eliminar egresado");
 
         lblControlNumber.setText("Matricula:");
 
