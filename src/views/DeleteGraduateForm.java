@@ -104,7 +104,7 @@ public class DeleteGraduateForm extends javax.swing.JFrame {
 
         txtAddress.setEnabled(false);
 
-        bttnDelete.setText("Delete");
+        bttnDelete.setText("Eliminar");
 
         bttnCancel.setText("Cancelar");
 
