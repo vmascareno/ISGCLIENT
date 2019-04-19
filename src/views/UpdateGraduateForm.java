@@ -57,7 +57,7 @@ public class UpdateGraduateForm extends javax.swing.JFrame {
         rdBttnSexFemale = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Crear nuevo egresado");
+        setTitle("Actualizar egresado");
 
         lblControlNumber.setText("Matricula:");
 
