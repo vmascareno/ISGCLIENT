@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblMechatronic" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblComputation" min="-2" pref="211" max="-2" attributes="0"/>
+                                  <Component id="lblMechanic" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblElectric" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblElectronic" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCivil" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblIndustrial" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblGraduades" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblPercentageIndustrial" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPercentageCivil" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPercentageElectronics" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPercentageElectric" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPercentageMechanic" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPercentageComputation" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPercentageMechatronics" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="bioengineering" min="-2" max="-2" attributes="0"/>
+                                  <Component id="government" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblEnergies" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblTypeOfJob" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblPercentageBioengineering" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPercentageEnergies" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPercentagePrivates" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPercentageGovernment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPercentageSexFemale" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPercentageSexMale" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblPrivates" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblMale" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblFemale" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblSex" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="206" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="returnMenu" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblGraduades" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblComputation" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPercentageComputation" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMechatronic" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPercentageMechatronics" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMechanic" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPercentageMechanic" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblElectric" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPercentageElectric" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblElectronic" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPercentageElectronics" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblCivil" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPercentageCivil" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblIndustrial" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPercentageIndustrial" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblEnergies" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPercentageEnergies" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="bioengineering" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPercentageBioengineering" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lblTypeOfJob" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblPercentageGovernment" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="government" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblPrivates" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPercentagePrivates" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lblSex" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblFemale" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPercentageSexFemale" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMale" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPercentageSexMale" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="returnMenu" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="lblGraduades">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Egresados por carrera:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblComputation">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ingeniero en Computaci&#xf3;n"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMechatronic">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ingeniero en Mecatr&#xf3;nica"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMechanic">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ingeniero Mecanico"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblElectric">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ingeniero en Electrica"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblElectronic">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ingeniero en Electronica"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCivil">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ingeniero Civil"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblIndustrial">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ingeniero Industrial"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEnergies">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ingeniero en Energias Renovables"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="bioengineering">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Bioingeniero"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPercentageComputation">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0 %"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPercentageMechanic">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0 %"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPercentageMechatronics">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0 %"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPercentageElectric">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0 %"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPercentageElectronics">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0 %"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPercentageCivil">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0 %"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPercentageIndustrial">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0 %"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPercentageEnergies">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0 %"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPercentageBioengineering">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0 %"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="government">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Empresas de Gobierno"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPercentagePrivates">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0 %"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPrivates">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Empresas Privadas"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPercentageGovernment">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0 %"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblTypeOfJob">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tipo de Trabajo:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSex">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Sexo:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblFemale">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Femenino"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMale">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Masculino"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPercentageSexFemale">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0 %"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPercentageSexMale">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0 %"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="returnMenu">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Regresar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="returnMenuActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>
