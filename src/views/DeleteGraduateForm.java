@@ -5,6 +5,9 @@
  */
 package views;
 
+import javax.swing.JOptionPane;
+import utils.InputUtil;
+
 /**
  *
  * @author vmascareno
@@ -55,6 +58,7 @@ public class DeleteGraduateForm extends javax.swing.JFrame {
         rdBttnSexFemale = new javax.swing.JRadioButton();
         txtCareer = new javax.swing.JTextField();
         txtEgresedAt = new javax.swing.JTextField();
+        bttnDeleteInformation = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Eliminar egresado");
@@ -105,8 +109,18 @@ public class DeleteGraduateForm extends javax.swing.JFrame {
         txtAddress.setEnabled(false);
 
         bttnDelete.setText("Eliminar");
+        bttnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnDeleteActionPerformed(evt);
+            }
+        });
 
         bttnCancel.setText("Cancelar");
+        bttnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnCancelActionPerformed(evt);
+            }
+        });
 
         bttnGrpSex.add(rdBttnSexMale);
         rdBttnSexMale.setText("Masculino");
@@ -120,6 +134,13 @@ public class DeleteGraduateForm extends javax.swing.JFrame {
 
         txtEgresedAt.setEnabled(false);
 
+        bttnDeleteInformation.setText("Borrar");
+        bttnDeleteInformation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnDeleteInformationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,6 +149,8 @@ public class DeleteGraduateForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(bttnDeleteInformation)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bttnCancel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bttnDelete))
@@ -213,12 +236,70 @@ public class DeleteGraduateForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bttnDelete)
-                    .addComponent(bttnCancel))
+                    .addComponent(bttnCancel)
+                    .addComponent(bttnDeleteInformation))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bttnDeleteInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnDeleteInformationActionPerformed
+
+        txtControlNumber.setText(null);
+        txtName.setText(null);
+        txtAddress.setText(null);
+        txtPhoneNumber.setText(null);
+        txtEmail.setText(null);
+        txtCareer.setText(null);
+        txtEgresedAt.setText(null);
+        bttnGrpSex.clearSelection();
+        bttnGrpIsWorking.clearSelection();
+        bttnGrpTypeWork.clearSelection();
+
+        lblWorkType.setVisible(false);
+        rdBttnWorkTypePrivate.setVisible(false);
+        rdBttnWorkTypeGovernment.setVisible(false);
+
+    }//GEN-LAST:event_bttnDeleteInformationActionPerformed
+
+    private void bttnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnCancelActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new MainMenuForm().setVisible(true);
+    }//GEN-LAST:event_bttnCancelActionPerformed
+
+    private void bttnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnDeleteActionPerformed
+        // TODO add your handling code here:
+        // TODO: Validar que los campos no esten vacios.
+        if (txtControlNumber.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Favor de capturar la matricula del egresado");
+        } else if (txtName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Favor de capturar el nombre del egresado");
+        } else if (txtAddress.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Favor de capturar la dirección del egresado");
+        } else if (txtPhoneNumber.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Favor de capturar el número de telefono del egresado");
+        } else if (txtEmail.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Favor de capturar el correo electronico del egresado");
+        } else if (txtCareer.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Favor de seleccionar la carrera del egresado");
+        } else if (txtEgresedAt.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Favor de seleccionar el año de egreso");
+        } else if (!rdBttnSexMale.isSelected() && !rdBttnSexFemale.isSelected()) {
+            JOptionPane.showMessageDialog(rootPane, "Favor de seleccionar el sexo del egresado");
+        } else if (!rdBttnIsWorkingYes.isSelected() && !rdBttnIsWorkingNo.isSelected()) {
+            JOptionPane.showMessageDialog(rootPane, "Favor de seleccionar el estado laboral del egresado");
+        } else if (rdBttnIsWorkingYes.isSelected() && !rdBttnWorkTypePrivate.isSelected() && !rdBttnWorkTypeGovernment.isSelected()) {
+            JOptionPane.showMessageDialog(rootPane, "Favor de seleccionar el tipo de trabajo del egresado");
+        } else if (!InputUtil.isPhoneValid(txtPhoneNumber.getText())) {
+            JOptionPane.showMessageDialog(rootPane, "El numero de telefono es invalido");
+        } else if (!InputUtil.isEmailValid(txtEmail.getText())) {
+            JOptionPane.showMessageDialog(rootPane, "El correo electronico es invalido");
+        } else {
+
+        }
+    }//GEN-LAST:event_bttnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,6 +338,7 @@ public class DeleteGraduateForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnCancel;
     private javax.swing.JButton bttnDelete;
+    private javax.swing.JButton bttnDeleteInformation;
     private javax.swing.ButtonGroup bttnGrpIsWorking;
     private javax.swing.ButtonGroup bttnGrpSex;
     private javax.swing.ButtonGroup bttnGrpTypeWork;
