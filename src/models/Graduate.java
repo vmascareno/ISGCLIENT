@@ -5,7 +5,10 @@
  */
 package models;
 
+import enums.Operation;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.Date;
 
 /**
@@ -13,7 +16,7 @@ import java.util.Date;
  * @author vmascareno
  */
 public class Graduate extends Client {
-
+    
     private int controlNumber;
     private String name;
     private String career;
@@ -24,7 +27,7 @@ public class Graduate extends Client {
     private int phoneNumber;
     private String email;
     private String address;
-
+    
     public Graduate(int controlNumber, String name, String career, Date egresedAt, String sex, boolean isWorking, String workType, int phoneNumber, String email, String address) throws IOException {
         super();
         this.controlNumber = controlNumber;
@@ -38,90 +41,96 @@ public class Graduate extends Client {
         this.email = email;
         this.address = address;
     }
-
+    
     public int getControlNumber() {
         return controlNumber;
     }
-
+    
     public void setControlNumber(int controlNumber) {
         this.controlNumber = controlNumber;
     }
-
+    
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
-
+    
     public String getCareer() {
         return career;
     }
-
+    
     public void setCareer(String career) {
         this.career = career;
     }
-
+    
     public Date getEgresedAt() {
         return egresedAt;
     }
-
+    
     public void setEgresedAt(Date egresedAt) {
         this.egresedAt = egresedAt;
     }
-
+    
     public String getSex() {
         return sex;
     }
-
+    
     public void setSex(String sex) {
         this.sex = sex;
     }
-
+    
     public boolean isIsWorking() {
         return isWorking;
     }
-
+    
     public void setIsWorking(boolean isWorking) {
         this.isWorking = isWorking;
     }
-
+    
     public String getWorkType() {
         return workType;
     }
-
+    
     public void setWorkType(String workType) {
         this.workType = workType;
     }
-
+    
     public int getPhoneNumber() {
         return phoneNumber;
     }
-
+    
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
+    
     public String getEmail() {
         return email;
     }
-
+    
     public void setEmail(String email) {
         this.email = email;
     }
-
+    
     public String getAddress() {
         return address;
     }
-
+    
     public void setAddress(String address) {
         this.address = address;
     }
-
+    
+    public void save() throws IOException {
+        ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+        Transaction transaction = new Transaction(Operation.ADD, toString());
+        outputStream.writeObject(transaction);
+    }
+    
     @Override
     public String toString() {
         return controlNumber + "\t" + name + "\t" + career + "\t" + egresedAt + "\t" + sex + "\t" + isWorking + "\t" + workType + "\t" + phoneNumber + "\t" + email + "\t" + address;
     }
-
+    
 }
