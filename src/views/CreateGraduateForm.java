@@ -5,7 +5,12 @@
  */
 package views;
 
+import java.io.IOException;
+import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import models.Graduate;
 import utils.InputUtil;
 
 /**
@@ -342,7 +347,48 @@ public class CreateGraduateForm extends javax.swing.JFrame {
         } else if (!InputUtil.isEmailValid(txtEmail.getText())) {
             JOptionPane.showMessageDialog(rootPane, "El correo electronico es invalido");
         } else {
-            // TODO: Todo es correcto, podemos registrar la informacion del egresado.
+            try {
+                String workType = "";
+
+                if (rdBttnIsWorkingYes.isSelected()) {
+                    workType = rdBttnWorkTypePrivate.isSelected() ? "Privada" : "Gobierno";
+                }
+
+                Graduate graduate = new Graduate(
+                        Integer.parseInt(txtControlNumber.getText()),
+                        txtName.getText(),
+                        cmbBxCareer.getSelectedItem().toString(),
+                        cmbBxEgresedAt.getSelectedItem().toString(),
+                        rdBttnSexMale.isSelected() == true ? "Masculino" : "Femenino",
+                        rdBttnIsWorkingYes.isSelected(),
+                        workType,
+                        txtPhoneNumber.getText(),
+                        txtEmail.getText(),
+                        txtAddress.getText()
+                );
+
+                boolean graduateSaved = graduate.save();
+
+                if (graduateSaved) {
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Información del egresado almacenada correctamente",
+                            "Registro de egresados",
+                            JOptionPane.INFORMATION_MESSAGE
+                    );
+                    this.setVisible(false);
+                    new MainMenuForm().setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "No se pudo registrar la información del egresado",
+                            "Registro de egresados",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(CreateGraduateForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_bttnAcceptActionPerformed
 
