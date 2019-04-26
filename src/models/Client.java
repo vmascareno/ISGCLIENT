@@ -17,7 +17,7 @@ public abstract class Client {
     protected final Socket socket;
 
     public Client() throws IOException {
-        socket = new Socket("192.168.0.16", 1406);
+        socket = new Socket("localhost", 1406);
     }
 
 }
