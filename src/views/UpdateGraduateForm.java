@@ -5,7 +5,12 @@
  */
 package views;
 
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import models.Graduate;
 import utils.InputUtil;
 
 /**
@@ -62,6 +67,7 @@ public class UpdateGraduateForm extends javax.swing.JFrame {
         rdBttnSexMale = new javax.swing.JRadioButton();
         rdBttnSexFemale = new javax.swing.JRadioButton();
         bttnDeleteInformation = new javax.swing.JButton();
+        bttnConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Actualizar egresado");
@@ -86,6 +92,12 @@ public class UpdateGraduateForm extends javax.swing.JFrame {
         lblEmail.setToolTipText("");
 
         lblAddress.setText("Domicilio:");
+
+        txtControlNumber.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtControlNumberKeyPressed(evt);
+            }
+        });
 
         cmbBxCareer.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Ingeniero en Computacion", "Ingeniero en Mecatrónica", "Ingeniero Mecanico", "Ingeniero en Electrica", "Ingeniero en Electronica", "Ingeniero Civil", "Ingeniero Industrial", "Ingeniero en Energias Renovables", "Bioingeniero" }));
 
@@ -140,6 +152,8 @@ public class UpdateGraduateForm extends javax.swing.JFrame {
             }
         });
 
+        bttnConsultar.setText("Consultar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,6 +162,8 @@ public class UpdateGraduateForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(bttnConsultar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bttnDeleteInformation)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bttnCancel)
@@ -236,7 +252,8 @@ public class UpdateGraduateForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bttnUpdate)
                     .addComponent(bttnCancel)
-                    .addComponent(bttnDeleteInformation))
+                    .addComponent(bttnDeleteInformation)
+                    .addComponent(bttnConsultar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -244,22 +261,7 @@ public class UpdateGraduateForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttnDeleteInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnDeleteInformationActionPerformed
-
-        txtControlNumber.setText(null);
-        txtName.setText(null);
-        txtAddress.setText(null);
-        txtPhoneNumber.setText(null);
-        txtEmail.setText(null);
-        cmbBxCareer.setSelectedIndex(0);
-        cmbBxEgresedAt.setSelectedIndex(0);
-        bttnGrpSex.clearSelection();
-        bttnGrpIsWorking.clearSelection();
-        bttnGrpTypeWork.clearSelection();
-
-        lblWorkType.setVisible(false);
-        rdBttnWorkTypePrivate.setVisible(false);
-        rdBttnWorkTypeGovernment.setVisible(false);
-
+        clearFields();
     }//GEN-LAST:event_bttnDeleteInformationActionPerformed
 
     private void bttnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnCancelActionPerformed
@@ -310,9 +312,128 @@ public class UpdateGraduateForm extends javax.swing.JFrame {
         } else if (!InputUtil.isEmailValid(txtEmail.getText())) {
             JOptionPane.showMessageDialog(rootPane, "El correo electronico es invalido");
         } else {
+            try {
+                String workType = "";
+
+                if (rdBttnIsWorkingYes.isSelected()) {
+                    workType = rdBttnWorkTypePrivate.isSelected() ? "Privada" : "Gobierno";
+                }
+
+                Graduate graduate = new Graduate(
+                        Integer.parseInt(txtControlNumber.getText()),
+                        txtName.getText(),
+                        cmbBxCareer.getSelectedItem().toString(),
+                        cmbBxEgresedAt.getSelectedItem().toString(),
+                        rdBttnSexMale.isSelected() == true ? "Masculino" : "Femenino",
+                        rdBttnIsWorkingYes.isSelected(),
+                        workType,
+                        txtPhoneNumber.getText(),
+                        txtEmail.getText(),
+                        txtAddress.getText()
+                );
+
+                boolean graduateSaved = graduate.update();
+
+                if (graduateSaved) {
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Información del egresado actualizada correctamente",
+                            "Actualización de egresados",
+                            JOptionPane.INFORMATION_MESSAGE
+                    );
+                    this.setVisible(false);
+                    new MainMenuForm().setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "No se pudo actualizar la información del egresado",
+                            "Actualización de egresados",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(CreateGraduateForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         }
     }//GEN-LAST:event_bttnUpdateActionPerformed
+
+    private void txtControlNumberKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtControlNumberKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            try {
+                if (this.txtControlNumber.getText().isEmpty()) {
+                    this.clearFields();
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Favor de capturar la matricula del egresado",
+                            "Actualizar egresado",
+                            JOptionPane.INFORMATION_MESSAGE
+                    );
+                } else {
+                    Graduate graduate = new Graduate();
+                    graduate.setControlNumber(Integer.parseInt(this.txtControlNumber.getText()));
+                    graduate.get();
+
+                    if (graduate.getControlNumber() == -1) {
+                        this.clearFields();
+                        JOptionPane.showMessageDialog(
+                                this,
+                                "La matricula del egresado aun no se encuentra registrada",
+                                "Actualizar egresado",
+                                JOptionPane.INFORMATION_MESSAGE
+                        );
+                    } else {
+                        this.txtName.setText(graduate.getName());
+                        this.cmbBxCareer.setSelectedItem(graduate.getCareer());
+                        this.cmbBxEgresedAt.setSelectedItem(graduate.getEgresedAt());
+
+                        if (graduate.getSex().equalsIgnoreCase("MASCULINO")) {
+                            this.rdBttnSexMale.setSelected(true);
+                        } else {
+                            this.rdBttnSexFemale.setSelected(true);
+                        }
+
+                        if (graduate.isIsWorking()) {
+                            this.rdBttnIsWorkingYes.setSelected(true);
+                        } else {
+                            this.rdBttnIsWorkingNo.setSelected(true);
+                        }
+
+                        if (graduate.getWorkType().equalsIgnoreCase("PRIVADA")) {
+                            this.rdBttnWorkTypePrivate.setSelected(true);
+                        } else {
+                            this.rdBttnWorkTypeGovernment.setSelected(true);
+                        }
+
+                        this.txtPhoneNumber.setText(graduate.getPhoneNumber());
+                        this.txtEmail.setText(graduate.getEmail());
+                        this.txtAddress.setText(graduate.getAddress());
+                    }
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(DeleteGraduateForm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DeleteGraduateForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_txtControlNumberKeyPressed
+
+    private void clearFields() {
+        txtControlNumber.setText(null);
+        txtName.setText(null);
+        txtAddress.setText(null);
+        txtPhoneNumber.setText(null);
+        txtEmail.setText(null);
+        cmbBxCareer.setSelectedIndex(0);
+        cmbBxEgresedAt.setSelectedIndex(0);
+        bttnGrpSex.clearSelection();
+        bttnGrpIsWorking.clearSelection();
+        bttnGrpTypeWork.clearSelection();
+
+        lblWorkType.setVisible(false);
+        rdBttnWorkTypePrivate.setVisible(false);
+        rdBttnWorkTypeGovernment.setVisible(false);
+    }
 
     /**
      * @param args the command line arguments
@@ -350,6 +471,7 @@ public class UpdateGraduateForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnCancel;
+    private javax.swing.JButton bttnConsultar;
     private javax.swing.JButton bttnDeleteInformation;
     private javax.swing.ButtonGroup bttnGrpIsWorking;
     private javax.swing.ButtonGroup bttnGrpSex;
