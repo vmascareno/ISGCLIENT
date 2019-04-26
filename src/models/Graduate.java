@@ -134,6 +134,30 @@ public class Graduate extends Client {
         ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
         return inputStream.readBoolean();
     }
+
+    public void get() throws IOException, ClassNotFoundException {
+        ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+        Transaction transaction = new Transaction(Operation.GET, toString());
+        outputStream.writeObject(transaction);
+
+        ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
+        String object = inputStream.readUTF();
+
+        if (object.equalsIgnoreCase("")) {
+            this.controlNumber = -1;
+        } else {
+            String[] paramsGraduate = object.split("\t");
+
+            this.name = paramsGraduate[1];
+            this.career = paramsGraduate[2];
+            this.egresedAt = paramsGraduate[3];
+            this.sex = paramsGraduate[4];
+            this.isWorking = Boolean.valueOf(paramsGraduate[5]);
+            this.workType = paramsGraduate[6];
+            this.phoneNumber = paramsGraduate[7];
+            this.email = paramsGraduate[8];
+            this.address = paramsGraduate[9];
+        }
     }
 
     public boolean delete() throws IOException {
