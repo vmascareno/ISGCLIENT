@@ -183,15 +183,13 @@ public class Graduate extends Client implements Serializable {
         }
     }
 
-    public List<Graduate> getByCareer() throws IOException, ClassNotFoundException {
+    public String[] getByCareer() throws IOException, ClassNotFoundException {
         ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
         Transaction transaction = new Transaction(Operation.GET_BY_CAREER, toString());
         outputStream.writeObject(transaction);
 
         ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
-        List<Graduate> graduates = (List<Graduate>) inputStream.readObject();
-
-        return graduates;
+        return (String[]) inputStream.readObject();
     }
 
     public String[] getAll() throws IOException, ClassNotFoundException {
