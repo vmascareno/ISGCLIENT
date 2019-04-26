@@ -5,6 +5,15 @@
  */
 package views;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import models.Graduate;
+
 /**
  *
  * @author vmascareno
@@ -36,9 +45,9 @@ public class ListGraduateForm extends javax.swing.JFrame {
         txtSelectByControNumber = new javax.swing.JTextField();
         cmbBxSelectByCareer = new javax.swing.JComboBox();
         bttnSelect = new javax.swing.JButton();
-        scrllPnEgresates = new javax.swing.JScrollPane();
-        TblEgresates = new javax.swing.JTable();
         bttnCancel = new javax.swing.JButton();
+        scrllPnGraduates = new javax.swing.JScrollPane();
+        txtrGraduates = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lista de egresados");
@@ -55,34 +64,11 @@ public class ListGraduateForm extends javax.swing.JFrame {
         cmbBxSelectByCareer.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione una opción", "Ingeniero en Computacion", "Ingeniero en Mecatrónica", "Ingeniero Mecanico", "Ingeniero en Electrica", "Ingeniero en Electronica", "Ingeniero Civil", "Ingeniero Industrial", "Ingeniero en Energias Renovables", "Bioingeniero" }));
 
         bttnSelect.setText("Consultar");
-
-        TblEgresates.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Matricula", "Nombre", "Carrera", "Año de egreso", "Sexo", "¿Trabaja?", "Tipo de trabajo", "Teléfono", "Correo electrónico", "Domicilio", "Fecha de registro"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        bttnSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnSelectActionPerformed(evt);
             }
         });
-        scrllPnEgresates.setViewportView(TblEgresates);
 
         bttnCancel.setText("Cancelar");
         bttnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -91,6 +77,10 @@ public class ListGraduateForm extends javax.swing.JFrame {
             }
         });
 
+        txtrGraduates.setColumns(20);
+        txtrGraduates.setRows(5);
+        scrllPnGraduates.setViewportView(txtrGraduates);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,7 +88,6 @@ public class ListGraduateForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrllPnEgresates)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblSelectBy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -115,7 +104,8 @@ public class ListGraduateForm extends javax.swing.JFrame {
                         .addComponent(bttnSelect)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bttnCancel)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(scrllPnGraduates))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -131,7 +121,7 @@ public class ListGraduateForm extends javax.swing.JFrame {
                     .addComponent(cmbBxSelectByCareer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bttnCancel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrllPnEgresates, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                .addComponent(scrllPnGraduates, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -176,6 +166,49 @@ public class ListGraduateForm extends javax.swing.JFrame {
         new MainMenuForm().setVisible(true);
     }//GEN-LAST:event_bttnCancelActionPerformed
 
+    private void bttnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnSelectActionPerformed
+
+        try {
+            Graduate graduate;
+            List<Graduate> graduates;
+            switch (cmbBxSelectBy.getSelectedIndex()) {
+                case 0:
+                    graduate = new Graduate();
+                    String[] allGraduates = graduate.getAll();
+
+                    txtrGraduates.removeAll();
+
+                    for (String item : allGraduates) {
+                        txtrGraduates.append(item);
+                    }
+
+                    break;
+                case 1:
+                    int controlNumber = Integer.parseInt(this.txtSelectByControNumber.getText());
+                    graduate = new Graduate();
+                    graduate.setControlNumber(controlNumber);
+                    graduate.get();
+
+                    if (graduate.getControlNumber() == -1) {
+                        JOptionPane.showMessageDialog(
+                                this,
+                                "La matricula del egresado aun no se encuentra registrada",
+                                "Actualizar egresado",
+                                JOptionPane.INFORMATION_MESSAGE
+                        );
+                    } else {
+                        txtrGraduates.removeAll();
+                        txtrGraduates.append(graduate.toString());
+                    }
+                    break;
+                case 2:
+                    break;
+            }
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(ListGraduateForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bttnSelectActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -212,14 +245,14 @@ public class ListGraduateForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TblEgresates;
     private javax.swing.JButton bttnCancel;
     private javax.swing.JButton bttnSelect;
     private javax.swing.JComboBox cmbBxSelectBy;
     private javax.swing.JComboBox cmbBxSelectByCareer;
     private javax.swing.JLabel lblSelectBy;
     private javax.swing.JLabel lblSelectByField;
-    private javax.swing.JScrollPane scrllPnEgresates;
+    private javax.swing.JScrollPane scrllPnGraduates;
     private javax.swing.JTextField txtSelectByControNumber;
+    private javax.swing.JTextArea txtrGraduates;
     // End of variables declaration//GEN-END:variables
 }

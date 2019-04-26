@@ -9,12 +9,16 @@ import enums.Operation;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *
  * @author vmascareno
  */
-public class Graduate extends Client {
+public class Graduate extends Client implements Serializable {
+
+    private static final long serialVersionUID = 1113799434508676095L;
 
     private int controlNumber;
     private String name;
@@ -156,7 +160,7 @@ public class Graduate extends Client {
 
     public void get() throws IOException, ClassNotFoundException {
         ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-        Transaction transaction = new Transaction(Operation.GET, toString());
+        Transaction transaction = new Transaction(Operation.GET_BY_CONTROL_NUMBER, toString());
         outputStream.writeObject(transaction);
 
         ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
@@ -177,6 +181,26 @@ public class Graduate extends Client {
             this.email = paramsGraduate[8];
             this.address = paramsGraduate[9];
         }
+    }
+
+    public List<Graduate> getByCareer() throws IOException, ClassNotFoundException {
+        ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+        Transaction transaction = new Transaction(Operation.GET_BY_CAREER, toString());
+        outputStream.writeObject(transaction);
+
+        ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
+        List<Graduate> graduates = (List<Graduate>) inputStream.readObject();
+
+        return graduates;
+    }
+
+    public String[] getAll() throws IOException, ClassNotFoundException {
+        ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+        Transaction transaction = new Transaction(Operation.GET_ALL, null);
+        outputStream.writeObject(transaction);
+
+        ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
+        return (String[]) inputStream.readObject();
     }
 
     public boolean delete() throws IOException {
