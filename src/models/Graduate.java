@@ -127,7 +127,16 @@ public class Graduate extends Client {
         Transaction transaction = new Transaction(Operation.ADD, toString());
         outputStream.writeObject(transaction);
     }
-    
+
+    public boolean delete() throws IOException {
+        ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+        Transaction transaction = new Transaction(Operation.DELETE, toString());
+        outputStream.writeObject(transaction);
+
+        ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
+        return inputStream.readBoolean();
+    }
+
     @Override
     public String toString() {
         return controlNumber + "\t" + name + "\t" + career + "\t" + egresedAt + "\t" + sex + "\t" + isWorking + "\t" + workType + "\t" + phoneNumber + "\t" + email + "\t" + address;
