@@ -121,11 +121,16 @@ public class Graduate extends Client {
     public void setAddress(String address) {
         this.address = address;
     }
-    
-    public void save() throws IOException {
+
+    public boolean save() throws IOException {
         ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
         Transaction transaction = new Transaction(Operation.ADD, toString());
         outputStream.writeObject(transaction);
+
+        ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
+        return inputStream.readBoolean();
+    }
+
     public boolean update() throws IOException {
         ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
         Transaction transaction = new Transaction(Operation.UPDATE, toString());
