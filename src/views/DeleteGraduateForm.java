@@ -5,7 +5,12 @@
  */
 package views;
 
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import models.Graduate;
 import utils.InputUtil;
 
 /**
@@ -83,6 +88,12 @@ public class DeleteGraduateForm extends javax.swing.JFrame {
         lblEmail.setToolTipText("");
 
         lblAddress.setText("Domicilio:");
+
+        txtControlNumber.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtControlNumberKeyPressed(evt);
+            }
+        });
 
         txtName.setEnabled(false);
 
@@ -270,36 +281,117 @@ public class DeleteGraduateForm extends javax.swing.JFrame {
     }//GEN-LAST:event_bttnCancelActionPerformed
 
     private void bttnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnDeleteActionPerformed
-        // TODO add your handling code here:
-        // TODO: Validar que los campos no esten vacios.
         if (txtControlNumber.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Favor de capturar la matricula del egresado");
-        } else if (txtName.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Favor de capturar el nombre del egresado");
-        } else if (txtAddress.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Favor de capturar la dirección del egresado");
-        } else if (txtPhoneNumber.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Favor de capturar el número de telefono del egresado");
-        } else if (txtEmail.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Favor de capturar el correo electronico del egresado");
-        } else if (txtCareer.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Favor de seleccionar la carrera del egresado");
-        } else if (txtEgresedAt.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Favor de seleccionar el año de egreso");
-        } else if (!rdBttnSexMale.isSelected() && !rdBttnSexFemale.isSelected()) {
-            JOptionPane.showMessageDialog(rootPane, "Favor de seleccionar el sexo del egresado");
-        } else if (!rdBttnIsWorkingYes.isSelected() && !rdBttnIsWorkingNo.isSelected()) {
-            JOptionPane.showMessageDialog(rootPane, "Favor de seleccionar el estado laboral del egresado");
-        } else if (rdBttnIsWorkingYes.isSelected() && !rdBttnWorkTypePrivate.isSelected() && !rdBttnWorkTypeGovernment.isSelected()) {
-            JOptionPane.showMessageDialog(rootPane, "Favor de seleccionar el tipo de trabajo del egresado");
-        } else if (!InputUtil.isPhoneValid(txtPhoneNumber.getText())) {
-            JOptionPane.showMessageDialog(rootPane, "El numero de telefono es invalido");
-        } else if (!InputUtil.isEmailValid(txtEmail.getText())) {
-            JOptionPane.showMessageDialog(rootPane, "El correo electronico es invalido");
         } else {
+            try {
+                Graduate graduate = new Graduate();
+                graduate.setControlNumber(Integer.parseInt(this.txtControlNumber.getText()));
+                boolean graduateDeleted = graduate.delete();
 
+                if (graduateDeleted) {
+                    this.clearFields();
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Información del egresado eliminada exitosamente",
+                            "Eliminar egresado",
+                            JOptionPane.INFORMATION_MESSAGE
+                    );
+
+                    this.setVisible(false);
+                    new MainMenuForm().setVisible(true);
+                } else {
+                    this.clearFields();
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Se produjo un error al intentar eliminar la información del egresado",
+                            "Eliminar egresado",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(DeleteGraduateForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_bttnDeleteActionPerformed
+
+    private void txtControlNumberKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtControlNumberKeyPressed
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            try {
+                if (this.txtControlNumber.getText().isEmpty()) {
+                    this.clearFields();
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Favor de capturar la matricula del egresado",
+                            "Eliminar egresado",
+                            JOptionPane.INFORMATION_MESSAGE
+                    );
+                } else {
+                    Graduate graduate = new Graduate();
+                    graduate.setControlNumber(Integer.parseInt(this.txtControlNumber.getText()));
+                    graduate.get();
+
+                    if (graduate.getControlNumber() == -1) {
+                        this.clearFields();
+                        JOptionPane.showMessageDialog(
+                                this,
+                                "La matricula del egresado aun no se encuentra registrada",
+                                "Eliminar egresado",
+                                JOptionPane.INFORMATION_MESSAGE
+                        );
+                    } else {
+                        this.txtName.setText(graduate.getName());
+                        this.txtCareer.setText(graduate.getCareer());
+                        this.txtEgresedAt.setText(graduate.getEgresedAt());
+
+                        if (graduate.getSex().equalsIgnoreCase("MASCULINO")) {
+                            this.rdBttnSexMale.setSelected(true);
+                        } else {
+                            this.rdBttnSexFemale.setSelected(true);
+                        }
+
+                        if (graduate.isIsWorking()) {
+                            this.rdBttnIsWorkingYes.setSelected(true);
+                        } else {
+                            this.rdBttnIsWorkingNo.setSelected(true);
+                        }
+
+                        if (graduate.getWorkType().equalsIgnoreCase("PRIVADA")) {
+                            this.rdBttnWorkTypePrivate.setSelected(true);
+                        } else {
+                            this.rdBttnWorkTypeGovernment.setSelected(true);
+                        }
+
+                        this.txtPhoneNumber.setText(graduate.getPhoneNumber());
+                        this.txtEmail.setText(graduate.getEmail());
+                        this.txtAddress.setText(graduate.getAddress());
+                    }
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(DeleteGraduateForm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DeleteGraduateForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_txtControlNumberKeyPressed
+
+    private void clearFields() {
+        txtControlNumber.setText(null);
+        txtName.setText(null);
+        txtAddress.setText(null);
+        txtPhoneNumber.setText(null);
+        txtEmail.setText(null);
+        txtCareer.setText(null);
+        txtEgresedAt.setText(null);
+        bttnGrpSex.clearSelection();
+        bttnGrpIsWorking.clearSelection();
+        bttnGrpTypeWork.clearSelection();
+
+        lblWorkType.setVisible(false);
+        rdBttnWorkTypePrivate.setVisible(false);
+        rdBttnWorkTypeGovernment.setVisible(false);
+    }
 
     /**
      * @param args the command line arguments
