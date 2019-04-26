@@ -6,12 +6,10 @@
 package views;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import models.Graduate;
 
 /**
@@ -176,10 +174,11 @@ public class ListGraduateForm extends javax.swing.JFrame {
                     graduate = new Graduate();
                     String[] allGraduates = graduate.getAll();
 
-                    txtrGraduates.removeAll();
+                    txtrGraduates.selectAll();
+                    txtrGraduates.replaceSelection(null);
 
                     for (String item : allGraduates) {
-                        txtrGraduates.append(item);
+                        txtrGraduates.append(item + "\n");
                     }
 
                     break;
@@ -197,11 +196,23 @@ public class ListGraduateForm extends javax.swing.JFrame {
                                 JOptionPane.INFORMATION_MESSAGE
                         );
                     } else {
-                        txtrGraduates.removeAll();
-                        txtrGraduates.append(graduate.toString());
+                        txtrGraduates.selectAll();
+                        txtrGraduates.replaceSelection(null);
+                        txtrGraduates.append(graduate.toString() + "\n");
                     }
                     break;
                 case 2:
+                    graduate = new Graduate();
+                    graduate.setCareer(cmbBxSelectByCareer.getSelectedItem().toString());
+                    String[] graduatesRelatedToCareer = graduate.getByCareer();
+
+                    txtrGraduates.selectAll();
+                    txtrGraduates.replaceSelection(null);
+
+                    for (String item : graduatesRelatedToCareer) {
+                        txtrGraduates.append(item + "\n");
+                    }
+
                     break;
             }
         } catch (IOException | ClassNotFoundException ex) {
